@@ -1,0 +1,26 @@
+{
+  "name": "we-still-feel-fine",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "3.x",
+    "jade": "~0.33.0",
+    "ntwitter": "~0.5.0",
+    "socket.io": "~0.9"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-less": "~0.6.4",
+    "grunt-contrib-watch": "~0.5.1",
+    "jade": "~0.33.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lauren/we-still-feel-fine.git"
+  }
+}

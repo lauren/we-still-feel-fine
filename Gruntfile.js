@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       },
       my_target: {
         files: {
-          'public/js/<%= pkg.name %>.min.js': ['client-src/js/<%= pkg.name %>-board.js', 'client-src/js/<%= pkg.name %>-board.js', 'client-src/js/<%= pkg.name %>-game.js'],
+          'public/js/<%= pkg.name %>.min.js': ['client-src/js/<%= pkg.name %>.js'],
         }
       }
     },

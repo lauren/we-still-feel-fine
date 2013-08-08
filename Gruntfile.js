@@ -29,7 +29,7 @@ module.exports = function(grunt) {
         tasks: ['jshint', 'uglify'],
       },
       less: {
-        files: ['client-src/less/*.less'],
+        files: ['client-src/*/*.less'],
         tasks: ['less'],
       }
     },

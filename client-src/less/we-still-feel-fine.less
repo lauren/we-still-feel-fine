@@ -3,21 +3,43 @@
 @helveticaNeueLight: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;
 @helveticaNeueUltraLight: "HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;
 
-.header {
+@baseTextColor: #333;
+
+.transition (@transition: all, @delay: 0.5s, @pace: ease-in-out) {
+  -webkit-transition: @transition @delay @pace;
+     -moz-transition: @transition @delay @pace;
+       -o-transition: @transition @delay @pace;
+          transition: @transition @delay @pace;
+}
+
+.border-color-transition (@delay: 0.5s, @pace: ease-in-out) {
+  .transition(border-color, @delay, @pace);
+}
+
+
+.text-overlay {
   position: fixed;
   background: #fff;
-  padding: 15px;
   font-weight: lighter;
-  a, a:hover, a:visited {
-    color: #333;
-    text-decoration: none;
-  }
 }
 
 body, html {
   height: 100%;
   widows: 100%;
   font-family: @helveticaNeueUltraLight;
+  .border-color-transition;
+  a, a:visited {
+    color: @baseTextColor;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 2px dashed transparent;
+  }
+  a:hover {
+    text-decoration: none;
+    color: @baseTextColor;
+    border-bottom: 2px dashed @baseTextColor;
+    .border-color-transition;
+  }
 }
 
 svg {
@@ -28,12 +50,24 @@ svg {
 h1 {
   opacity: 0.8;
   font-size: 40px;
+  padding: 15px;
+  a, a:hover, a:visited {
+    font-weight: lighter;
+  }
 }
 
 .tweet-detail {
-  bottom: 0px;
+  bottom: 58px;
   opacity: 0;
   font-size: 30px;
+  padding: 15px;
+}
+
+footer {
+  padding: 5px;
+  bottom: 0px;
+  font-family: @helveticaNeueLight;
+  opacity: 0.8;
 }
 
 .circle {

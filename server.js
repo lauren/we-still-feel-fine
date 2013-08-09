@@ -60,8 +60,10 @@ twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en'}, f
       io.sockets.emit('feelingTweet', data);
       console.log("feeling tweet: " + data.text);
       console.log("feeling: " + data.feeling);
+      console.log(data);
     }
     else {
+      console.log(data);
       console.log("not a real feeling: " + data.text);
     }
     

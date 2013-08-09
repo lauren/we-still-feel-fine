@@ -3,6 +3,17 @@
 @helveticaNeueLight: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;
 @helveticaNeueUltraLight: "HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;
 
+.header {
+  position: fixed;
+  background: #fff;
+  padding: 15px;
+  font-weight: lighter;
+  a, a:hover, a:visited {
+    color: #333;
+    text-decoration: none;
+  }
+}
+
 body, html {
   height: 100%;
   widows: 100%;
@@ -15,18 +26,14 @@ svg {
 }
 
 h1 {
-  position: fixed;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 40px;
-  font-weight: lighter;
-  padding: 15px;
-  background: #fff;
   opacity: 0.8;
-  a, a:hover, a:visited {
-    color: #333;
-    text-decoration: none;
-  }
+  font-size: 40px;
+}
+
+.tweet-detail {
+  bottom: 0px;
+  opacity: 0;
+  font-size: 30px;
 }
 
 .circle {

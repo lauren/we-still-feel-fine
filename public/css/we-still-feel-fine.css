@@ -1,5 +1,7 @@
 @import url(http://reset5.googlecode.com/hg/reset.min.css);
+.header{position:fixed;background:#fff;padding:15px;font-weight:lighter}.header a,.header a:hover,.header a:visited{color:#333;text-decoration:none}
 body,html{height:100%;widows:100%;font-family:"HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif}
 svg{width:100%;height:100%}
-h1{position:fixed;margin:0 auto;text-align:center;font-size:40px;font-weight:lighter;padding:15px;background:#fff;opacity:0.8}h1 a,h1 a:hover,h1 a:visited{color:#333;text-decoration:none}
+h1{opacity:0.8;font-size:40px}
+.tweet-detail{bottom:0px;opacity:0;font-size:30px}
 .circle{cursor:pointer;opacity:0.9}

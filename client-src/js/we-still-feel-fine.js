@@ -17,8 +17,10 @@
       return Math.random() * document.documentElement.clientHeight;
     };
 
-    var quarterBrowserHeight = function () {
-      return 0.25 * document.documentElement.clientHeight;
+    var quarterSmallestBrowserDimension = function () {
+      return document.documentElement.clientHeight < document.documentElement.clientWidth 
+        ? 0.25 * document.documentElement.clientHeight
+        : 0.25 * document.documentElement.clientWidth;
     };
 
     socket.on("feelingTweet", function (data) {
@@ -99,7 +101,7 @@
         d3.select(clickedEl).transition()
           .duration(200)
           .attr("class", "selected")
-          .attr("r", quarterBrowserHeight);
+          .attr("r", quarterSmallestBrowserDimension);
 
         // put the tweet in detailEl and fade in
         detailEl.innerHTML = clickedEl.dataset.tweet;

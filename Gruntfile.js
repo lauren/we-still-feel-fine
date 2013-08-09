@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
       options: {
-        banner: '/*! We Still Feel Fine Client JS v<%= pkg.version %> | Copyright 2013 Lauren Sperber https://github.com/lauren/node-connect-four/blob/master/LICENSE | <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        banner: '/*! We Still Feel Fine Client JS v<%= pkg.version %> | Copyright 2013 Lauren Sperber https://github.com/lauren/we-still-feel-fine/blob/master/LICENSE | <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       my_target: {
         files: {

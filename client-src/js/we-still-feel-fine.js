@@ -26,22 +26,34 @@
     socket.on("feelingTweet", function (data) {
       console.log(data);
       tweets.push(data);
-      var circles = d3.select("svg").selectAll("circle")
-        .data(tweets);
+      var svg = d3.select("svg");
 
-      circles.enter().append("circle")
-        .attr("class", "circle")
-        .attr("data-feeling", data.feeling)
-        .attr("data-tweet", data.text)
-        .style("fill", randomHex())
-        .style("stroke", randomHex())
-        .style("stroke-width", "2px")
-        .attr("cx", randomX())
-        .attr("cy", randomY())
-        .attr("r", 0)
-        .transition()
-        .duration(200)
-        .attr("r", 20);
+      var groups = svg.selectAll("g")
+          .data(tweets)
+          .enter()
+          .append("g");
+
+      groups.attr("transform", function(d, i) {
+        var x = randomX();
+        var y = randomY();
+        return "translate(" + [x,y] + ")";
+      });
+        
+      var circles = groups.append("circle")
+          .attr({
+            cx: 0,
+            cy: 0,
+            r: 0,
+            fill: randomHex(),
+            stroke: randomHex(),
+            "stroke-width": 2,
+            "data-feeling": data.feeling,
+            "data-tweet": data.text,
+            class: "circle"
+          })
+          .transition()
+          .duration(200)
+          .attr("r", 20);
 
     });
 
@@ -70,6 +82,16 @@
         .attr("class", "circle");
     };
 
+    // remove all labels
+    var removeLabels = function () {
+      d3.select("svg").selectAll("text").remove();
+    };
+
+    // remove one label
+    var removeLabel = function (clickedEl) {
+      d3.select(clickedEl.parentNode).selectAll("text").remove();
+    };
+
     var hideTweetDetails = function (detailEl) {
       d3.select(detailEl).transition()
         .duration(200)
@@ -84,23 +106,26 @@
       if (clickedEl.className.baseVal === "circle selected") {
 
         // if click was on the selected circle, 
-        // reset selected circle and hide tweet detials
+        // reset selected circle, remove its label,
+        //  and hide tweet detials
         resetCircle(clickedEl);
+        removeLabel(clickedEl);
         hideTweetDetails(detailEl);
 
       } else if (clickedEl.className.baseVal === "circle") {
 
         resetAllCircles();
+        removeLabels();
 
-        // bring clicked circle to front
-        clickedEl.parentNode.appendChild(clickedEl);
+        // bring group container of clicked circle to front
+        clickedEl.parentNode.parentNode.appendChild(clickedEl.parentNode);
         
         // transition clicked circle to radius of
         // 25% of browser height and add
         // selected class
         d3.select(clickedEl).transition()
           .duration(200)
-          .attr("class", "selected")
+          .attr("class", "circle selected")
           .attr("r", quarterSmallestBrowserDimension);
 
         // put the tweet in detailEl and fade in
@@ -109,13 +134,19 @@
           .duration(200)
           .style("opacity", "0.8");
 
-        textEl.innerHTML = clickedEl.dataset.feeling;
-        textEl.style.fill = randomHex();
+        var label = d3.select(clickedEl.parentNode).append("text")
+            .text(clickedEl.dataset.feeling)
+            .attr({
+              "alignment-baseline": "middle",
+              "text-anchor": "middle",
+              "class": "label"
+            });
       
       } else {
         // if click was outside a circle,
         // close all circles hide tweet detials
         resetAllCircles();
+        removeLabels();
         hideTweetDetails(detailEl);
       }
 

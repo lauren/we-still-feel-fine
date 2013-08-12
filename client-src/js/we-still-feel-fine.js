@@ -98,6 +98,46 @@
         .style("opacity", "0");
     };
 
+    bindEvent(document, "mouseenter", function (event) {
+      var hoveredEl = event.srcElement,
+          textEl = document.createElement("text");
+
+      if (hoveredEl.className.baseVal == "circle") {
+        // bring group container of hovered circle to front
+        hoveredEl.parentNode.parentNode.appendChild(hoveredEl.parentNode);
+        
+        // transition hovered circle to radius of
+        // 25% of browser height and add
+        // selected class
+        d3.select(hoveredEl).transition()
+          .duration(200)
+          .attr("class", "circle selected")
+          .attr("r", 40);
+
+        // add label to group container of hovered circle
+        // with the tweet's feeling
+        var label = d3.select(clickedEl.parentNode).append("text")
+            .text(clickedEl.dataset.feeling)
+            .attr({
+              "alignment-baseline": "middle",
+              "text-anchor": "middle",
+              "class": "label"
+            });
+      }
+    });
+
+    bindEvent(document, "mouseleave", function (event) {
+      var hoveredEl = event.srcElement,
+          textEl = document.createElement("text");
+
+      if (hoveredEl.className.baseVal == "circle") {
+        
+        resetCircle(hoveredEl);
+        removeLabel(hoveredEl);
+
+      }
+    });
+
     bindEvent(document, "click", function (event) {
       var clickedEl = event.srcElement,
           detailEl = document.getElementById('tweet-detail'),

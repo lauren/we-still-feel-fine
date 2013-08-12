@@ -31,7 +31,35 @@
       var groups = svg.selectAll("g")
           .data(tweets)
           .enter()
-          .append("g");
+          .append("g")
+          .attr({
+            "data-feeling": data.feeling,
+            "data-tweet": data.text,
+          })
+          .on("mouseenter", function (event) {
+            this.parentNode.appendChild(this);
+
+            d3.select(this).select("circle")
+            .transition()
+            .duration(200)
+            .attr("r", 50);
+            d3.select(this)
+            .append("text")
+            .text(this.dataset.feeling)
+            .attr({
+              "alignment-baseline": "middle",
+              "text-anchor": "middle",
+              "class": "label"
+            })
+          })
+          .on("mouseleave", function (event) {
+            if (this.className.baseVal !== "selected") {
+              d3.select(this).selectAll("circle").transition()
+              .duration(200)
+              .attr("r", 20);
+              d3.select(this).selectAll("text").remove();
+            }
+          });
 
       groups.attr("transform", function(d, i) {
         var x = randomX();
@@ -98,50 +126,9 @@
         .style("opacity", "0");
     };
 
-    bindEvent(document, "mouseenter", function (event) {
-      var hoveredEl = event.srcElement,
-          textEl = document.createElement("text");
-
-      if (hoveredEl.className.baseVal == "circle") {
-        // bring group container of hovered circle to front
-        hoveredEl.parentNode.parentNode.appendChild(hoveredEl.parentNode);
-        
-        // transition hovered circle to radius of
-        // 25% of browser height and add
-        // selected class
-        d3.select(hoveredEl).transition()
-          .duration(200)
-          .attr("class", "circle selected")
-          .attr("r", 40);
-
-        // add label to group container of hovered circle
-        // with the tweet's feeling
-        var label = d3.select(clickedEl.parentNode).append("text")
-            .text(clickedEl.dataset.feeling)
-            .attr({
-              "alignment-baseline": "middle",
-              "text-anchor": "middle",
-              "class": "label"
-            });
-      }
-    });
-
-    bindEvent(document, "mouseleave", function (event) {
-      var hoveredEl = event.srcElement,
-          textEl = document.createElement("text");
-
-      if (hoveredEl.className.baseVal == "circle") {
-        
-        resetCircle(hoveredEl);
-        removeLabel(hoveredEl);
-
-      }
-    });
-
     bindEvent(document, "click", function (event) {
       var clickedEl = event.srcElement,
-          detailEl = document.getElementById('tweet-detail'),
-          textEl = document.createElement("text");
+          detailEl = document.getElementById('tweet-detail');
       
       if (clickedEl.className.baseVal === "circle selected") {
 
@@ -159,6 +146,9 @@
 
         // bring group container of clicked circle to front
         clickedEl.parentNode.parentNode.appendChild(clickedEl.parentNode);
+
+        d3.select(clickedEl.parentNode)
+          .attr("class", "selected");
         
         // transition clicked circle to radius of
         // 25% of browser height and add

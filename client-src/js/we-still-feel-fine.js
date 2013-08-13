@@ -157,7 +157,7 @@
           .text(group.dataset.user)
           .attr("href", "http://twitter.com/" + group.dataset.user);
         d3.select("#tweet-text")
-          .text(": " + group.dataset.tweet + " ");
+          .html(": " + group.dataset.tweet + " ");
         d3.select("#tweet-link")
           .attr("href", "http://twitter.com/" + group.dataset.user + "/status/" + group.dataset.tweetId);
         d3.select("#tweet-detail").transition()

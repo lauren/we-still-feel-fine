@@ -49,7 +49,7 @@ twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en'}, f
 
     var tokenizedText = tokenizeText(data.text),
         feelingIndex = findFeelingIndex(tokenizedText),
-        eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 5), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
+        eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 1), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
     
     // look for legitimate feeling words
     matchingFeelings = new RegExp(feelingsList.join("|")).exec(eligibleWords);

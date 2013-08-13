@@ -41,7 +41,8 @@
             "data-tweet": data.text,
             "data-user": data.user.screen_name,
             "data-userimage": data.user.profile_image_url,
-            "data-tweetId": data.id_str
+            "data-tweetId": data.id_str,
+            "data-feelingColor": data.feelingColor
           })
           .on("mouseenter", function () {
             mouseEnterGroup(this);
@@ -66,9 +67,7 @@
       var circles = groups.append("circle")
           .attr({
             r: 0,
-            fill: randomHex(),
-            stroke: randomHex(),
-            "stroke-width": 2,
+            fill: data.feelingColor,
             class: "circle"
           })
           .transition()

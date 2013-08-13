@@ -5,7 +5,9 @@ var express = require("express"),
     Twitter = require('ntwitter'),
     // keys-sample.js is included. rename to keys.js and update with your own keys.
     keys = require('./lib/keys.js'),
-    feelings = require('./lib/feelings.js').feelings;
+    feelings = require('./lib/feelings.js'),
+    feelingsList = feelings.feelings,
+    feelingsColors = feelings.feelingColors ;
 
 // app configuration
 app.configure(function () {
@@ -44,7 +46,8 @@ var twit = new Twitter({
 twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en'}, function(stream) {
   stream.on('data', function (data) {
     var cleanedText = data.text,
-        matchingFeelings;
+        matchingFeelings,
+        firstFeeling;
     
     // remove @handles from the text to be analyzed
     if (/@/.test(data.text)) {
@@ -54,9 +57,12 @@ twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en'}, f
     }
     
     // look for legitimate feeling words
-    matchingFeelings = new RegExp(feelings.join("|")).exec(cleanedText);
+    matchingFeelings = new RegExp(feelingsList.join("|")).exec(cleanedText);
+
     if (matchingFeelings) {
-      data.feeling = matchingFeelings[0].replace(/ /g, "");
+      firstFeeling = matchingFeelings[0].replace(/ /g, "");
+      data.feeling = firstFeeling;
+      data.feelingColor = feelingsColors[firstFeeling];
       io.sockets.emit('feelingTweet', data);
       console.log("feeling tweet: " + data.text);
       console.log("feeling: " + data.feeling);

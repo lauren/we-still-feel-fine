@@ -26,6 +26,7 @@
     };
 
     socket.on("feelingTweet", function (data) {
+
       tweets.push(data);
 
       var svg = d3.select("svg");

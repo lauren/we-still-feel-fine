@@ -93,7 +93,7 @@
     var hideTweetDetails = function () {
       d3.select('#tweet-detail').transition()
         .duration(200)
-        .style("opacity", "0");
+        .style("display", "none");
     };
 
     // what happens when a group is moused over
@@ -108,7 +108,7 @@
           .select("circle")
           .transition()
           .duration(200)
-          .attr("r", 50);
+          .attr("r", 60);
 
         // add shadow with feeling text
         d3.select(group)
@@ -171,7 +171,7 @@
           .attr("href", "http://twitter.com/" + group.dataset.user + "/status/" + group.dataset.tweetId);
         d3.select("#tweet-detail").transition()
           .duration(200)
-          .style("opacity", "0.8");
+          .style("display", "block");
 
         // shadow disappears on first group clicked unless we add it again here
         var shadow = d3.select(group).append("text")

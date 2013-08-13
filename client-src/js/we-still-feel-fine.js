@@ -110,7 +110,16 @@
           .duration(200)
           .attr("r", 50);
 
-        
+        // add shadow with feeling text
+        d3.select(group)
+          .append("text")
+          .text(group.dataset.feeling)
+          .attr({
+            "alignment-baseline": "middle",
+            "text-anchor": "middle",
+            "class": "shadow"
+          });
+      
         // add label with feeling text
         d3.select(group)
           .append("text")
@@ -164,13 +173,22 @@
           .duration(200)
           .style("opacity", "0.8");
 
+        // shadow disappears on first group clicked unless we add it again here
+        var shadow = d3.select(group).append("text")
+            .text(group.dataset.feeling)
+            .attr({
+              "alignment-baseline": "middle",
+              "text-anchor": "middle",
+              "class": "shadow",
+            });
+
         // label disappears on first group clicked unless we add it again here
         var label = d3.select(group).append("text")
             .text(group.dataset.feeling)
             .attr({
               "alignment-baseline": "middle",
               "text-anchor": "middle",
-              "class": "label"
+              "class": "label",
             });
       }
     };

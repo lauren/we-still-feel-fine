@@ -7,7 +7,8 @@ var express = require("express"),
     keys = require('./lib/keys.js'),
     feelings = require('./lib/feelings.js'),
     feelingsList = feelings.feelings,
-    feelingsColors = feelings.feelingColors ;
+    feelingsColors = feelings.feelingColors,
+    newFeelingsList = feelings.newFeelings;
 
 // app configuration
 app.configure(function () {
@@ -20,7 +21,7 @@ app.configure(function () {
   app.use(express.methodOverride());
   // development only
   if (app.get("env") === "development") {
-    app.use(express.errorHandler());
+    // app.use(express.errorHandler());
   }
   if (app.get("env") === "production") {
     app.enable("view cache");
@@ -45,19 +46,13 @@ var twit = new Twitter({
 
 twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en'}, function(stream) {
   stream.on('data', function (data) {
-    var cleanedText = data.text,
-        matchingFeelings,
-        firstFeeling;
-    
-    // remove @handles from the text to be analyzed
-    if (/@/.test(data.text)) {
-      cleanedText = data.text.split(" ").filter(function (word) {
-        return !/@/.test(word);
-      }).join(" ");
-    }
+
+    var tokenizedText = tokenizeText(data.text),
+        feelingIndex = findFeelingIndex(tokenizedText),
+        eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 5), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
     
     // look for legitimate feeling words
-    matchingFeelings = new RegExp(feelingsList.join("|")).exec(cleanedText);
+    matchingFeelings = new RegExp(feelingsList.join("|")).exec(eligibleWords);
 
     if (matchingFeelings) {
       firstFeeling = matchingFeelings[0].replace(/ /g, "");
@@ -92,5 +87,21 @@ app.get("*", function (request, response) {
     return;
   }
 });
+
+var tokenizeText = function (text) {
+  text = text.toLowerCase().replace(/[\.\?\"\n,-\/#!$%\^&\*;:{}=\-_`~()]/g," ");
+  text = text.replace(/\s{2,}/g," ");
+  return text.split(" ");
+};
+
+var findFeelingIndex = function (tokenizedText) {
+  if (tokenizedText.indexOf("feel") > -1) {
+    return tokenizedText.indexOf("feel");
+  } else if (tokenizedText.indexOf("feeling") > -1) {
+    return tokenizedText.indexOf("feeling");
+  } else {
+    return tokenizedText.indexOf("felt");
+  }
+};
 
 server.listen(process.env.PORT || 3000);

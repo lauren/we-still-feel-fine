@@ -42,7 +42,8 @@
           .on("mouseenter", function () {
             mouseEnterGroup(this);
           })
-          .on("mouseleave", function () {     
+          .on("mouseleave", function () {
+            console.log("mouse exit");
             if (this.id !== "selected") {
               resetGroup(this);
             }
@@ -123,7 +124,7 @@
     // what happens when a group is clicked
     var clickGroup = function (group) {
       if (group.id === "selected") {
-        
+        console.log("selected group");
         // if click was on the selected group, 
         // reset it and hide tweet detials
         resetGroup(group);
@@ -151,6 +152,15 @@
         d3.select("#tweet-detail").transition()
           .duration(200)
           .style("opacity", "0.8");
+
+        // label disappears on first group clicked unless we add it again here
+        var label = d3.select(group).append("text")
+            .text(group.dataset.feeling)
+            .attr({
+              "alignment-baseline": "middle",
+              "text-anchor": "middle",
+              "class": "label"
+            });
       }
     }
 

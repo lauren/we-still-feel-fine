@@ -8,3 +8,4 @@ h1{opacity:0.8;font-size:40px;padding:15px}h1 a,h1 a:hover,h1 a:visited{font-wei
 footer{padding:5px;bottom:0px;font-family:"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;opacity:0.8}
 .circle{cursor:pointer;opacity:0.9}
 .label{cursor:pointer}
+#selected .label{font-size:28px}

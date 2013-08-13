@@ -37,13 +37,15 @@
           .append("g")
           .attr({
             "data-feeling": data.feeling,
-            "data-tweet": data.text
+            "data-tweet": data.text,
+            "data-user": data.user.screen_name,
+            "data-userimage": data.user.profile_image_url,
+            "data-tweetId": data.id_str
           })
           .on("mouseenter", function () {
             mouseEnterGroup(this);
           })
           .on("mouseleave", function () {
-            console.log("mouse exit");
             if (this.id !== "selected") {
               resetGroup(this);
             }
@@ -124,7 +126,6 @@
     // what happens when a group is clicked
     var clickGroup = function (group) {
       if (group.id === "selected") {
-        console.log("selected group");
         // if click was on the selected group, 
         // reset it and hide tweet detials
         resetGroup(group);
@@ -147,8 +148,18 @@
           .duration(200)
           .attr("r", quarterSmallestBrowserDimension);
 
-        // put the tweet in detailEl and fade in
-        document.getElementById("tweet-detail").innerHTML = group.dataset.tweet;
+        // put the tweet in #tweet-detail and fade in
+        d3.select("#user-link")
+          .attr("href", "http://twitter.com/" + group.dataset.user);
+        d3.select("#user-image")
+          .attr("src", group.dataset.userimage);
+        d3.select("#username-link")
+          .text(group.dataset.user)
+          .attr("href", "http://twitter.com/" + group.dataset.user);
+        d3.select("#tweet-text")
+          .text(": " + group.dataset.tweet + " ");
+        d3.select("#tweet-link")
+          .attr("href", "http://twitter.com/" + group.dataset.user + "/status/" + group.dataset.tweetId);
         d3.select("#tweet-detail").transition()
           .duration(200)
           .style("opacity", "0.8");
@@ -162,7 +173,7 @@
               "class": "label"
             });
       }
-    }
+    };
 
   };
 

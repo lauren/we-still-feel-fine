@@ -33,7 +33,7 @@ io.sockets.on("connection", function (socket) {
 
 });
 
-// ntwitter setp
+// ntwitter setup
 var twit = new Twitter({
   consumer_key: keys.TWITTER_CONSUMER_KEY,
   consumer_secret: keys.TWITTER_CONSUMER_SECRET,

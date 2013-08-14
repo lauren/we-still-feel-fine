@@ -43,7 +43,7 @@ var twit = new Twitter({
   access_token_secret: keys.TWITTER_TOKEN_SECRET
 });
 
-twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en'}, function(stream) {
+twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en', 'filter_level': 'medium'}, function(stream) {
   stream.on('data', function (data) {
 
     // eligible words span 2 words before and 5 after feel/feeling/felt

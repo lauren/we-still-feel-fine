@@ -1,13 +1,10 @@
 ;(function () {
 
   window.onload = function () {
-    var socket = io.connect(),
-        tweets = [];
 
-    // thanks Paul Irish
-    var randomHex = function () {
-      return '#'+Math.floor(Math.random()*16777215).toString(16);
-    };
+    var socket = io.connect(),
+        tweets = [],
+        newTweets = [];
 
     // constrained by browser width
     var randomX = function () {
@@ -26,8 +23,7 @@
     };
 
     socket.on("feelingTweet", function (data) {
-
-      tweets.push(data);
+      tweets.push(data); 
 
       var svg = d3.select("svg");
 
@@ -55,6 +51,14 @@
           .on("click", function (event) {
             clickGroup(this);
           });
+
+      if (tweets.length > 2000) {
+        var slicedTweet = tweets.shift();
+      }
+
+      svg.selectAll("g")
+        .data([slicedTweet], function (d) {return d;})
+        .remove();
 
       // place the group in a random location w/in browser
       groups.attr("transform", function(d, i) {
@@ -98,6 +102,7 @@
 
     // what happens when a group is moused over
     var mouseEnterGroup = function (group) {
+      
       // bring moused-over group to front
       group.parentNode.appendChild(group);
 
@@ -135,6 +140,7 @@
     // what happens when a group is clicked
     var clickGroup = function (group) {
       if (group.id === "selected") {
+        
         // if click was on the selected group, 
         // reset it and hide tweet detials
         resetGroup(group);

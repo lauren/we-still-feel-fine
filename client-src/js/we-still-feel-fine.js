@@ -52,7 +52,7 @@
             clickGroup(this);
           });
 
-      if (tweets.length > 2000) {
+      if (tweets.length > 1000) {
         var slicedTweet = tweets.shift();
       }
 

@@ -25,7 +25,8 @@
     socket.on("feelingTweet", function (data) {
       tweets.push(data); 
 
-      var svg = d3.select("svg");
+      var svg = d3.select("svg"),
+          slicedTweet;
 
       // create groups and mouse/click events
       var groups = svg.selectAll("g")
@@ -53,12 +54,11 @@
           });
 
       if (tweets.length > 1000) {
-        var slicedTweet = tweets.shift();
+        slicedTweet = tweets.shift();
+        svg.selectAll("g")
+          .data([slicedTweet], function (d) {return d;})
+          .remove();
       }
-
-      svg.selectAll("g")
-        .data([slicedTweet], function (d) {return d;})
-        .remove();
 
       // place the group in a random location w/in browser
       groups.attr("transform", function(d, i) {

@@ -7,8 +7,7 @@ var express = require("express"),
     keys = require('./lib/keys.js'),
     feelings = require('./lib/feelings.js'),
     feelingsList = feelings.feelings,
-    feelingsColors = feelings.feelingColors,
-    newFeelingsList = feelings.newFeelings;
+    feelingsColors = feelings.feelingColors;
 
 // app configuration
 app.configure(function () {
@@ -47,14 +46,18 @@ var twit = new Twitter({
 twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en'}, function(stream) {
   stream.on('data', function (data) {
 
+    // eligible words span 2 words before and 5 after feel/feeling/felt
+    // 2 words before "how bad I felt"
+    // 5 words after "I felt oh so very incredibly shitty"
     var tokenizedText = tokenizeText(data.text),
         feelingIndex = findFeelingIndex(tokenizedText),
-        eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 1), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
+        eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 2), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
     
     // look for legitimate feeling words
     matchingFeelings = new RegExp(feelingsList.join("|")).exec(eligibleWords);
 
     if (matchingFeelings) {
+      // strip spaces from matching feeling
       firstFeeling = matchingFeelings[0].replace(/ /g, "");
       data.feeling = firstFeeling;
       data.feelingColor = feelingsColors[firstFeeling];
@@ -88,12 +91,15 @@ app.get("*", function (request, response) {
   }
 });
 
+// replace punctuation with spaces, collapse multiple
+// consecutive spaces, and split into words
 var tokenizeText = function (text) {
   text = text.toLowerCase().replace(/[\.\?\"\n,-\/#!$%\^&\*;:{}=\-_`~()]/g," ");
   text = text.replace(/\s{2,}/g," ");
   return text.split(" ");
 };
 
+// find location of feel, feeling, or felt
 var findFeelingIndex = function (tokenizedText) {
   if (tokenizedText.indexOf("feel") > -1) {
     return tokenizedText.indexOf("feel");

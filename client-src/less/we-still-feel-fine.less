@@ -16,6 +16,12 @@
   .transition(border-color, @delay, @pace);
 }
 
+.shadows (@shadow) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+       -o-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
 
 .text-overlay {
   position: fixed;
@@ -48,7 +54,7 @@ svg {
 }
 
 h1 {
-  opacity: 0.8;
+  opacity: 0.9;
   font-size: 40px;
   padding: 15px;
   a, a:hover, a:visited {
@@ -87,6 +93,7 @@ h1 {
   padding: 15px;
   width: 100%;
   opacity: 0.9;
+  .shadows(0px 0px 10px 1px #333);
 }
 
 .user-image {
@@ -110,5 +117,5 @@ footer {
   padding: 5px;
   bottom: 0px;
   font-family: @helveticaNeueLight;
-  opacity: 0.8;
+  opacity: 0.9;
 }

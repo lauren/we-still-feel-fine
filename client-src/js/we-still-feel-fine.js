@@ -6,12 +6,12 @@
         tweets = [],
         newTweets = [];
 
-    // constrained by browser width
+    // constrained by browser width. 100px offset for inner SVG containers.
     var randomX = function () {
       return Math.random() * document.documentElement.clientWidth - 100;
     };
 
-    // constrained by browser height
+    // constrained by browser height. 100px offset for inner SVG containers.
     var randomY = function () {
       return Math.random() * document.documentElement.clientHeight - 100;
     };
@@ -60,8 +60,8 @@
       // create groups 
       var groups = innerSVGs.append("g");
 
-      // when tweets gets too long, take the first one
-      // off and remove its innerSVG from the DOM
+      // when tweets array gets too long, take the first one
+      // off and remove its SVG element from the DOM
       if (tweets.length > 1000) {
         firstTweet = tweets.shift();
         svg.selectAll("svg")
@@ -84,6 +84,7 @@
 
     });
 
+    // execute a click event on an SVG group every 4 seconds
     setInterval(function () {
        var innerSVGs = d3.select("svg").selectAll("svg"),
           chosenCircleIndex = Math.floor(Math.random() * innerSVGs.length),
@@ -93,7 +94,7 @@
       event.initEvent("click",true,true);
       chosenCircle.dispatchEvent(event);
       showLabel(chosenCircle);  
-    }, 1000);
+    }, 4000);
 
     // reset group to default state
     var resetGroup = function (group) {
@@ -113,25 +114,6 @@
       d3.select('#tweet-detail').transition()
         .duration(200)
         .style("display", "none");
-    };
-
-    // what happens when a group is moused over
-    var mouseEnterGroup = function (group) {
-      
-      // bring moused-over group to front
-      group.parentNode.appendChild(group);
-
-      if (group.id !== "selected") {
-        
-        // expand circle radius
-        d3.select(group)
-          .select("circle")
-          .transition()
-          .duration(200)
-          .attr("r", 60);
-
-        showLabel(group);
-      }
     };
 
     var showLabel = function (group) {
@@ -158,6 +140,25 @@
           "text-anchor": "middle",
           "class": "label"
         });
+    };
+
+    // what happens when a group is moused over
+    var mouseEnterGroup = function (group) {
+      
+      // bring moused-over group to front
+      group.parentNode.appendChild(group);
+
+      if (group.id !== "selected") {
+        
+        // expand circle radius
+        d3.select(group)
+          .select("circle")
+          .transition()
+          .duration(200)
+          .attr("r", 60);
+
+        showLabel(group);
+      }
     };
 
     // what happens when a group is clicked

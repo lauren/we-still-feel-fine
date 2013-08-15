@@ -8,7 +8,7 @@ h1{opacity:0.8;font-size:40px;padding:15px}h1 a,h1 a:hover,h1 a:visited{font-wei
 .shadow{cursor:pointer;stroke:#000;opacity:0.4;stroke-width:3px;letter-spacing:2px}
 .label{cursor:pointer;stroke:#fff;letter-spacing:2px}
 #selected .label,#selected .shadow{font-size:28px}
-.tweet-detail{bottom:58px;display:none;font-size:30px;padding:15px;width:100%;opacity:0.8}
+.tweet-detail{bottom:58px;display:none;font-size:30px;padding:15px;width:100%;opacity:0.9}
 .user-image{margin-right:10px;margin-top:4px;max-width:50px;max-height:50px;float:left}
 .tweet{width:99%}
 .tweet-link{font-size:14px;vertical-align:middle}

@@ -8,12 +8,12 @@
 
     // constrained by browser width
     var randomX = function () {
-      return Math.random() * document.documentElement.clientWidth;
+      return Math.random() * document.documentElement.clientWidth - 100;
     };
 
     // constrained by browser height
     var randomY = function () {
-      return Math.random() * document.documentElement.clientHeight;
+      return Math.random() * document.documentElement.clientHeight - 100;
     };
 
     var quarterSmallestBrowserDimension = function () {
@@ -26,50 +26,54 @@
       tweets.push(data); 
 
       var svg = d3.select("svg"),
-          slicedTweet;
+          firstTweet;
 
-      // create groups and mouse/click events
-      var groups = svg.selectAll("g")
-          .data(tweets)
-          .enter()
-          .append("g")
-          .attr({
-            "data-feeling": data.feeling,
-            "data-tweet": data.text,
-            "data-user": data.user.screen_name,
-            "data-userimage": data.user.profile_image_url,
-            "data-tweetId": data.id_str,
-            "data-feelingColor": data.feelingColor
-          })
-          .on("mouseenter", function () {
-            mouseEnterGroup(this);
-          })
-          .on("mouseleave", function () {
-            if (this.id !== "selected") {
-              resetGroup(this);
-            }
-          })
-          .on("click", function (event) {
-            clickGroup(this);
-          });
+      // create inner SVGs (necessary because g elements can't be
+      // positioned with X and Y) and give them the tweet data
+      // and mouse/click events
+      var innerSVGs = svg.selectAll("svg")
+        .data(tweets)
+        .enter()
+        .append("svg")
+        .attr({
+          "x": randomX(),
+          "y": randomY(),
+          "data-feeling": data.feeling,
+          "data-tweet": data.text,
+          "data-user": data.user.screen_name,
+          "data-userimage": data.user.profile_image_url,
+          "data-tweetId": data.id_str,
+          "data-feelingColor": data.feelingColor
+        })
+        .on("mouseenter", function () {
+          mouseEnterGroup(this);
+        })
+        .on("mouseleave", function () {
+          if (this.id !== "selected") {
+            resetGroup(this);
+          }
+        })
+        .on("click", function (event) {
+          clickGroup(this);
+        });        
 
+      // create groups 
+      var groups = innerSVGs.append("g");
+
+      // when tweets gets too long, take the first one
+      // off and remove its innerSVG from the DOM
       if (tweets.length > 1000) {
-        slicedTweet = tweets.shift();
-        svg.selectAll("g")
-          .data([slicedTweet], function (d) {return d;})
+        firstTweet = tweets.shift();
+        svg.selectAll("svg")
+          .data([firstTweet], function (d) {return d;})
           .remove();
       }
-
-      // place the group in a random location w/in browser
-      groups.attr("transform", function(d, i) {
-        var x = randomX();
-        var y = randomY();
-        return "translate(" + [x,y] + ")";
-      });
 
       // add circles to each group
       var circles = groups.append("circle")
           .attr({
+            cx: 100,
+            cy: 100,
             r: 0,
             fill: data.feelingColor,
             class: "circle"
@@ -79,6 +83,17 @@
           .attr("r", 20);
 
     });
+
+    setInterval(function () {
+       var innerSVGs = d3.select("svg").selectAll("svg"),
+          chosenCircleIndex = Math.floor(Math.random() * innerSVGs.length),
+          chosenCircle = innerSVGs[chosenCircleIndex][0];
+
+      var event = document.createEvent("SVGEvents");
+      event.initEvent("click",true,true);
+      chosenCircle.dispatchEvent(event);
+      showLabel(chosenCircle);  
+    }, 1000);
 
     // reset group to default state
     var resetGroup = function (group) {
@@ -115,26 +130,34 @@
           .duration(200)
           .attr("r", 60);
 
-        // add shadow with feeling text
-        d3.select(group)
-          .append("text")
-          .text(group.dataset.feeling)
-          .attr({
-            "alignment-baseline": "middle",
-            "text-anchor": "middle",
-            "class": "shadow"
-          });
-      
-        // add label with feeling text
-        d3.select(group)
-          .append("text")
-          .text(group.dataset.feeling)
-          .attr({
-            "alignment-baseline": "middle",
-            "text-anchor": "middle",
-            "class": "label"
-          });
+        showLabel(group);
       }
+    };
+
+    var showLabel = function (group) {
+      // add shadow with feeling text
+      d3.select(group)
+        .append("text")
+        .text(group.dataset.feeling)
+        .attr({
+          x: 100,
+          y: 100,
+          "alignment-baseline": "middle",
+          "text-anchor": "middle",
+          "class": "shadow"
+        });
+    
+      // add label with feeling text
+      d3.select(group)
+        .append("text")
+        .text(group.dataset.feeling)
+        .attr({
+          x: 100,
+          y: 100,
+          "alignment-baseline": "middle",
+          "text-anchor": "middle",
+          "class": "label"
+        });
     };
 
     // what happens when a group is clicked
@@ -161,7 +184,7 @@
         d3.select(group).select("circle")
           .transition()
           .duration(200)
-          .attr("r", quarterSmallestBrowserDimension);
+          .attr("r", 100);
 
         // put the tweet in #tweet-detail and fade in
         d3.select("#user-link")
@@ -179,23 +202,6 @@
           .duration(200)
           .style("display", "block");
 
-        // shadow disappears on first group clicked unless we add it again here
-        var shadow = d3.select(group).append("text")
-            .text(group.dataset.feeling)
-            .attr({
-              "alignment-baseline": "middle",
-              "text-anchor": "middle",
-              "class": "shadow",
-            });
-
-        // label disappears on first group clicked unless we add it again here
-        var label = d3.select(group).append("text")
-            .text(group.dataset.feeling)
-            .attr({
-              "alignment-baseline": "middle",
-              "text-anchor": "middle",
-              "class": "label",
-            });
       }
     };
 

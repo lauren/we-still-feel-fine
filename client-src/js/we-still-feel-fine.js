@@ -23,6 +23,14 @@
     };
 
     socket.on("feelingTweet", function (data) {
+
+      if (d3.select("#loading").length > 0) {
+        d3.select("#loading")
+          .transition()
+          .duration(200)
+          .style("opacity", 0);
+      }
+
       tweets.push(data); 
 
       var svg = d3.select("svg"),

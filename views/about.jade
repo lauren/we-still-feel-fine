@@ -1,0 +1,44 @@
+    div.text-overlay.about
+      h3 About
+        p
+          | In 2005, 
+          a(href="http://number27.org") Jonathan Harris
+          |  and 
+          a(href="http://www.stanford.edu/~sdkamvar/") Sep Kamvar
+          | created 
+          a(href='http://wefeelfine.org') We Feel Fine
+          | , a project that scraped blogging platform for mentions of 
+          | feelings and visualized them in a Java applet written in Processing. 
+          | The project originally had an 
+          a(href="http://wefeelfine.org/api.html") API
+          | , but it's now sadly 
+          a(href="http://api.wefeelfine.org:8080/ShowFeelings?") broken
+          | . The complete used by We Feel Fine 
+          a(href='http://wefeelfine.org/methodology.html') methodology
+          | is still available online.
+        p
+          | I thought it would be fun to update We Feel Fine for 
+          | 2013, usine the 
+          a(href="https://dev.twitter.com/docs/streaming-apis") Twitter Streaming API
+          | , 
+          a(href="http://nodejs.org/") Node.js
+          | , and
+          a(href="http://d3js.org") D3.js
+          | . I've followed We Feel Fine's original methodology pretty closely. 
+          | My steps are:
+        ul
+          li 
+            | Listen to the Twitter Streaming API for tweets that contain
+            | the feeling indicators: "feel," "feeling," or "felt."
+          li
+            | Create a string of eligible words that starts two words before
+            | the feeling indicator and ends five words after it. This is a 
+            | departure from We Feel Fine, which looked for eligible feelings 
+            | in the entire sentence in which the feeling indicator was detected.
+            | From casual analysis, limiting eligible words to those closer to the
+            | feeling indicator seems to provide higher-quality feelings.
+          li
+            | Search the string of eligible words for any word in 
+            a(href="http://wefeelfine.org/data/files/feelings.txt") the list of eligible feelings
+            | that We Feel Fine compiled
+

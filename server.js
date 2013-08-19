@@ -74,6 +74,14 @@ twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en', 'f
   });
 });
 
+twit.stream.on('end', function (response) {
+    // Handle a disconnection
+});
+
+twit.stream.on('destroy', function (response) {
+    // Handle a 'silent' disconnection from Twitter, no end/error event fired
+});
+
 // routes
 app.get("/?", function (request, response) {
   response.render("index");

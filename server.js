@@ -27,14 +27,6 @@ app.configure(function () {
   }
 });
 
-// socket.io setup
-io.sockets.on("connection", function (socket) {
-
-  socket.on("disconnect", function () {
-  });
-
-});
-
 // ntwitter setup
 var twit = new Twitter({
   consumer_key: keys.TWITTER_CONSUMER_KEY,
@@ -93,6 +85,10 @@ twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en', 'f
 // routes
 app.get("/?", function (request, response) {
   response.render("index");
+});
+
+app.get("/about", function (request, response) {
+  response.render("about");
 });
 
 app.get("*", function (request, response) {

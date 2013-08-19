@@ -1,3 +1,4 @@
 .DS_Store
 lib/keys.js
 npm-debug.log
+.elasticbeanstalk/

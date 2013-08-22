@@ -1,6 +1,6 @@
 @import url(http://reset5.googlecode.com/hg/reset.min.css);
 .text-overlay{background:#fff;font-weight:lighter}
-body,html{height:100%;widows:100%;font-family:"HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;-webkit-transition:border-color .5s ease-in-out;-moz-transition:border-color .5s ease-in-out;-o-transition:border-color .5s ease-in-out;transition:border-color .5s ease-in-out}body a,html a,body a:visited,html a:visited{color:#333;text-decoration:none;font-weight:bold;border-bottom:2px dashed transparent}
+body,html{height:100%;width:100%;font-family:"HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;-webkit-transition:border-color .5s ease-in-out;-moz-transition:border-color .5s ease-in-out;-o-transition:border-color .5s ease-in-out;transition:border-color .5s ease-in-out}body a,html a,body a:visited,html a:visited{color:#333;text-decoration:none;font-weight:bold;border-bottom:2px dashed transparent}
 body a:hover,html a:hover{text-decoration:none;color:#333;border-bottom:2px dashed #333;-webkit-transition:border-color .5s ease-in-out;-moz-transition:border-color .5s ease-in-out;-o-transition:border-color .5s ease-in-out;transition:border-color .5s ease-in-out}
 svg{width:100%;height:100%}
 h1{opacity:0.9;font-size:40px;padding:15px;position:absolute}h1 a,h1 a:hover,h1 a:visited{font-weight:lighter}
@@ -17,6 +17,7 @@ li{margin-bottom:5px}
 .tweet{width:99%}
 .tweet-link{font-size:14px;vertical-align:middle}
 footer{padding:5px;bottom:0px;position:fixed;font-family:"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;opacity:0.9}
+.github-widgets{vertical-align:bottom}
 .loading{position:absolute;text-align:center;top:45%;left:0;right:0;width:350px;margin:auto}
 .heart-load{display:inline-block;height:30px;width:30px;background-image:url("/images/heart-loader.gif");vertical-align:middle}
 .load-text{vertical-align:middle;font-family:"HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;font-size:26px;margin-left:5px}

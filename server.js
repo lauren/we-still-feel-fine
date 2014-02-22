@@ -1,16 +1,14 @@
 var express = require("express"),
     app = express(),
     server = require("http").createServer(app),
+    env = process.env.NODE_ENV || "development",
     io = require("socket.io").listen(server),
     Twitter = require('ntwitter'),
     feelings = require('./lib/feelings.js'),
     feelingsList = feelings.feelings,
     feelingsColors = feelings.feelingColors;
 
-console.log(app.get("env"));
-console.log(process.env);
-
-if (app.get("env") === "development") {
+if (env === "development") {
   // keys-sample.js is included. rename to keys.js and update with your own keys.
   var keys = require('./lib/keys.js');
 }
@@ -24,11 +22,10 @@ app.configure(function () {
   app.use(express.logger("dev"));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  // development only
-  if (app.get("env") === "development") {
+  if (env === "development") {
     // app.use(express.errorHandler());
   }
-  if (app.get("env") === "production") {
+  if (env === "production") {
     app.enable("view cache");
   }
 });

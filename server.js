@@ -3,11 +3,14 @@ var express = require("express"),
     server = require("http").createServer(app),
     io = require("socket.io").listen(server),
     Twitter = require('ntwitter'),
-    // keys-sample.js is included. rename to keys.js and update with your own keys.
-    keys = require('./lib/keys.js'),
     feelings = require('./lib/feelings.js'),
     feelingsList = feelings.feelings,
     feelingsColors = feelings.feelingColors;
+
+if (app.get("env") === "development") {
+  // keys-sample.js is included. rename to keys.js and update with your own keys.
+  var keys = require('./lib/keys.js');
+}
 
 // app configuration
 app.configure(function () {

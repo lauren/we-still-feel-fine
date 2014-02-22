@@ -7,6 +7,9 @@ var express = require("express"),
     feelingsList = feelings.feelings,
     feelingsColors = feelings.feelingColors;
 
+console.log(app.get("env"));
+console.log(process.env);
+
 if (app.get("env") === "development") {
   // keys-sample.js is included. rename to keys.js and update with your own keys.
   var keys = require('./lib/keys.js');

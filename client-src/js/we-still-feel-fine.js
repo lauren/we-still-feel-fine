@@ -98,10 +98,12 @@
           chosenCircleIndex = Math.floor(Math.random() * innerSVGs.length),
           chosenCircle = innerSVGs[chosenCircleIndex][0];
 
-      var event = document.createEvent("SVGEvents");
-      event.initEvent("click",true,true);
-      chosenCircle.dispatchEvent(event);
-      showLabel(chosenCircle);  
+      if (chosenCircle) {
+        var event = document.createEvent("SVGEvents");
+        event.initEvent("click",true,true);
+        chosenCircle.dispatchEvent(event);
+        showLabel(chosenCircle);
+      }
     }, 4000);
 
     // reset group to default state

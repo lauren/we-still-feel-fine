@@ -31,5 +31,5 @@ I ♥ pull requests. Here's how to contribute:
 To deploy to heroku, you must set these environmental variables:
 
 ```
-heroku config:set TWITTER_CONSUMER_KEY="your-consumer-key" TWITTER_CONSUMER_SECRET="your-consumer-secret" TWITTER_ACCESS_TOKEN="your-access-token" TWITTER_TOKEN_SECRET="your-token-secret" --app your-app
+heroku config:set TWITTER_CONSUMER_KEY="your-consumer-key" TWITTER_CONSUMER_SECRET="your-consumer-secret" TWITTER_ACCESS_TOKEN="your-access-token" TWITTER_TOKEN_SECRET="your-token-secret" NODE_ENV="production" --app your-app
 ```

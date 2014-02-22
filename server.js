@@ -25,9 +25,6 @@ app.configure(function () {
   if (env === "development") {
     // app.use(express.errorHandler());
   }
-  if (env === "production") {
-    app.enable("view cache");
-  }
 });
 
 // ntwitter setup

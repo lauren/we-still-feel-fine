@@ -23,4 +23,13 @@ I ♥ pull requests. Here's how to contribute:
 3. From the repo directory, `npm install --save-dev`
 4. `grunt watch`: This will automatically JSHint all JavaScript, concatenate and minify the client-side JavaScript, and compile the LESS every time you save. Watch for JSHint errors and correct them.
 5. Rename `keys-sample.js` as `keys.js` and update it with your twitter credentials. This file is .gitignored, so it won't be checked in if you push this to a public repo.
-6. Code!
+6. `foreman start` to start the server, which listens on port 5000.
+7. Code!
+
+## Deploying
+
+To deploy to heroku, you must set these environmental variables:
+
+```
+heroku config:set TWITTER_CONSUMER_KEY="your-consumer-key" TWITTER_CONSUMER_SECRET="your-consumer-secret" TWITTER_ACCESS_TOKEN="your-access-token" TWITTER_TOKEN_SECRET="your-token-secret" --app your-app
+```

@@ -29,10 +29,10 @@ app.configure(function () {
 
 // ntwitter setup
 var twit = new Twitter({
-  consumer_key: keys.TWITTER_CONSUMER_KEY,
-  consumer_secret: keys.TWITTER_CONSUMER_SECRET,
-  access_token_key: keys.TWITTER_ACCESS_TOKEN,
-  access_token_secret: keys.TWITTER_TOKEN_SECRET
+  consumer_key: process.env.TWITTER_CONSUMER_KEY || keys.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET || keys.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN || keys.TWITTER_ACCESS_TOKEN,
+  access_token_secret: process.env.TWITTER_TOKEN_SECRET || keys.TWITTER_TOKEN_SECRET
 });
 
 twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en', 'filter_level': 'medium'}, function(stream) {

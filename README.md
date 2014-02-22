@@ -1,5 +1,5 @@
-We Still Feel Fine
-==================
+♥ We Still Feel Fine ♥
+======================
 
 In 2005, [Jonathan Harris](http://number27.org) and [Sep Kamvar](http://www.stanford.edu/~sdkamvar/) created [We Feel Fine](http://wefeelfine.org), a project that searched blogs for mentions of feelings and visualized them in a Java applet written in Processing. 
 
@@ -16,7 +16,7 @@ Briefly, here's what's going on:
 
 ## Contributing
 
-I ♥ pull requests. Here's how to contribute:
+Pull requests make ME feel ♥. Here's how to contribute:
 
 1. Fork and pull repo.
 2. If you don't have node, [install it](http://howtonode.org/how-to-install-nodejs).
@@ -31,5 +31,9 @@ I ♥ pull requests. Here's how to contribute:
 To deploy to heroku, you must set these environmental variables:
 
 ```
-heroku config:set TWITTER_CONSUMER_KEY="your-consumer-key" TWITTER_CONSUMER_SECRET="your-consumer-secret" TWITTER_ACCESS_TOKEN="your-access-token" TWITTER_TOKEN_SECRET="your-token-secret" NODE_ENV="production" --app your-app
+  heroku config:set TWITTER_CONSUMER_KEY="your-consumer-key" 
+  TWITTER_CONSUMER_SECRET="your-consumer-secret" 
+  TWITTER_ACCESS_TOKEN="your-access-token" 
+  TWITTER_TOKEN_SECRET="your-token-secret" 
+  NODE_ENV="production" --app your-app
 ```

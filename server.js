@@ -38,30 +38,35 @@ var twit = new Twitter({
 twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en', 'filter_level': 'medium'}, function(stream) {
   stream.on('data', function (data) {
 
-    // eligible words span 2 words before and 5 after feel/feeling/felt
-    // 2 words before "how bad I felt"
-    // 5 words after "I felt oh so very incredibly shitty"
-    var tokenizedText = tokenizeText(data.text),
-        feelingIndex = findFeelingIndex(tokenizedText),
-        eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 2), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
-    
-    // look for legitimate feeling words
-    matchingFeelings = new RegExp(feelingsList.join("|")).exec(eligibleWords);
+    if (data.text) {
+      // eligible words span 2 words before and 5 after feel/feeling/felt
+      // 2 words before "how bad I felt"
+      // 5 words after "I felt oh so very incredibly shitty"
+      var tokenizedText = tokenizeText(data.text),
+          feelingIndex = findFeelingIndex(tokenizedText),
+          eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 2), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
+      
+      // look for legitimate feeling words
+      matchingFeelings = new RegExp(feelingsList.join("|")).exec(eligibleWords);
 
-    if (matchingFeelings) {
-      // strip spaces from matching feeling
-      firstFeeling = matchingFeelings[0].replace(/ /g, "");
-      data.feeling = firstFeeling;
-      data.feelingColor = feelingsColors[firstFeeling];
-      io.sockets.emit('feelingTweet', data);
-      console.log("feeling tweet: " + data.text);
-      console.log("feeling: " + data.feeling);
-      console.log(data);
+      if (matchingFeelings) {
+        // strip spaces from matching feeling
+        firstFeeling = matchingFeelings[0].replace(/ /g, "");
+        data.feeling = firstFeeling;
+        data.feelingColor = feelingsColors[firstFeeling];
+        io.sockets.emit('feelingTweet', data);
+        console.log("feeling tweet: " + data.text);
+        console.log("feeling: " + data.feeling);
+        console.log(data);
+      }
+      else {
+        console.log(data);
+        console.log("not a real feeling: " + data.text);
+      }
+    } else {
+      console.log("no data.text?!");
     }
-    else {
-      console.log(data);
-      console.log("not a real feeling: " + data.text);
-    }
+
     stream.on('end', function (response) {
       twit = new Twitter({
         consumer_key: keys.TWITTER_CONSUMER_KEY,

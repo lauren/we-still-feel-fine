@@ -27,65 +27,60 @@ app.configure(function () {
   }
 });
 
-// ntwitter setup
-var twit = new Twitter({
-  consumer_key: process.env.TWITTER_CONSUMER_KEY || keys.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET || keys.TWITTER_CONSUMER_SECRET,
-  access_token_key: process.env.TWITTER_ACCESS_TOKEN || keys.TWITTER_ACCESS_TOKEN,
-  access_token_secret: process.env.TWITTER_TOKEN_SECRET || keys.TWITTER_TOKEN_SECRET
-});
+var getTweets = function () {
 
-twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en', 'filter_level': 'medium'}, function(stream) {
-  stream.on('data', function (data) {
-
-    if (data.text) {
-      // eligible words span 2 words before and 5 after feel/feeling/felt
-      // 2 words before "how bad I felt"
-      // 5 words after "I felt oh so very incredibly shitty"
-      var tokenizedText = tokenizeText(data.text),
-          feelingIndex = findFeelingIndex(tokenizedText),
-          eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 2), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
-      
-      // look for legitimate feeling words
-      matchingFeelings = new RegExp(feelingsList.join("|")).exec(eligibleWords);
-
-      if (matchingFeelings) {
-        // strip spaces from matching feeling
-        firstFeeling = matchingFeelings[0].replace(/ /g, "");
-        data.feeling = firstFeeling;
-        data.feelingColor = feelingsColors[firstFeeling];
-        io.sockets.emit('feelingTweet', data);
-        console.log("feeling tweet: " + data.text);
-        console.log("feeling: " + data.feeling);
-        console.log(data);
-      }
-      else {
-        console.log(data);
-        console.log("not a real feeling: " + data.text);
-      }
-    } else {
-      console.log("no data.text?!");
-    }
-
-    stream.on('end', function (response) {
-      twit = new Twitter({
-        consumer_key: process.env.TWITTER_CONSUMER_KEY || keys.TWITTER_CONSUMER_KEY,
-        consumer_secret: process.env.TWITTER_CONSUMER_SECRET || keys.TWITTER_CONSUMER_SECRET,
-        access_token_key: process.env.TWITTER_ACCESS_TOKEN || keys.TWITTER_ACCESS_TOKEN,
-        access_token_secret: process.env.TWITTER_TOKEN_SECRET || keys.TWITTER_TOKEN_SECRET
-      });
-    });
-    stream.on('destroy', function (response) {
-      twit = new Twitter({
-        consumer_key: process.env.TWITTER_CONSUMER_KEY || keys.TWITTER_CONSUMER_KEY,
-        consumer_secret: process.env.TWITTER_CONSUMER_SECRET || keys.TWITTER_CONSUMER_SECRET,
-        access_token_key: process.env.TWITTER_ACCESS_TOKEN || keys.TWITTER_ACCESS_TOKEN,
-        access_token_secret: process.env.TWITTER_TOKEN_SECRET || keys.TWITTER_TOKEN_SECRET
-      });
-    });
-    
+  // ntwitter setup
+  var twit = new Twitter({
+    consumer_key: process.env.TWITTER_CONSUMER_KEY || keys.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || keys.TWITTER_CONSUMER_SECRET,
+    access_token_key: process.env.TWITTER_ACCESS_TOKEN || keys.TWITTER_ACCESS_TOKEN,
+    access_token_secret: process.env.TWITTER_TOKEN_SECRET || keys.TWITTER_TOKEN_SECRET
   });
-});
+
+  twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en', 'filter_level': 'medium'}, function(stream) {
+    stream.on('data', function (data) {
+
+      if (data.text) {
+        // eligible words span 2 words before and 5 after feel/feeling/felt
+        // 2 words before "how bad I felt"
+        // 5 words after "I felt oh so very incredibly shitty"
+        var tokenizedText = tokenizeText(data.text),
+            feelingIndex = findFeelingIndex(tokenizedText),
+            eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 2), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
+        
+        // look for legitimate feeling words
+        matchingFeelings = new RegExp(feelingsList.join("|")).exec(eligibleWords);
+
+        if (matchingFeelings) {
+          // strip spaces from matching feeling
+          firstFeeling = matchingFeelings[0].replace(/ /g, "");
+          data.feeling = firstFeeling;
+          data.feelingColor = feelingsColors[firstFeeling];
+          io.sockets.emit('feelingTweet', data);
+          console.log("feeling tweet: " + data.text);
+          console.log("feeling: " + data.feeling);
+          console.log(data);
+        }
+        else {
+          console.log(data);
+          console.log("not a real feeling: " + data.text);
+        }
+      } else {
+        console.log("no data.text?!");
+      }
+
+      stream.on('end', function (response) {
+        getTweets();
+      });
+      stream.on('destroy', function (response) {
+        getTweets();
+      });
+      
+    });
+  });
+};
+
+getTweets();
 
 // routes
 app.get("/?", function (request, response) {

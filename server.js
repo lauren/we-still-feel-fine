@@ -57,9 +57,9 @@ var getTweets = function () {
           data.feeling = firstFeeling;
           data.feelingColor = feelingsColors[firstFeeling];
           io.sockets.emit('feelingTweet', data);
+          console.log(data);
           console.log("feeling tweet: " + data.text);
           console.log("feeling: " + data.feeling);
-          console.log(data);
         }
         else {
           console.log(data);

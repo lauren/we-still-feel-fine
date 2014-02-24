@@ -57,16 +57,17 @@ var getTweets = function () {
           data.feeling = firstFeeling;
           data.feelingColor = feelingsColors[firstFeeling];
           io.sockets.emit('feelingTweet', data);
-          console.log(data);
+          // console.log(data);
           console.log("feeling tweet: " + data.text);
           console.log("feeling: " + data.feeling);
         }
         else {
-          console.log(data);
+          // console.log(data);
           console.log("not a real feeling: " + data.text);
         }
       } else {
         console.log("no data.text?!");
+        getTweets();
       }
       
     });
@@ -77,6 +78,12 @@ var getTweets = function () {
     stream.on('destroy', function (response) {
       getTweets();
     });
+    stream.on('error', function (response) {
+      console.log("an error happened");
+      console.log(error);
+      getTweets();
+    });
+
 
   });
 };

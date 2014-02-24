@@ -81,18 +81,14 @@ var getTweets = function (backOffDuration) {
     stream.on('error', function (response, status) {
       console.log("an error happened with status " + status);
       console.log("current duration: " + backOffDuration);
-      if (status === 420 && backOffDuration < 60000) {
-        backOff(60000);
-      } else {
-        backOff(backOffDuration);
-      }
+      backOff(backOffDuration);
     });
 
 
   });
 };
 
-getTweets(5000);
+getTweets(60000);
 
 // routes
 app.get("/?", function (request, response) {

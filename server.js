@@ -68,15 +68,16 @@ var getTweets = function () {
       } else {
         console.log("no data.text?!");
       }
-
-      stream.on('end', function (response) {
-        getTweets();
-      });
-      stream.on('destroy', function (response) {
-        getTweets();
-      });
       
     });
+
+    stream.on('end', function (response) {
+      getTweets();
+    });
+    stream.on('destroy', function (response) {
+      getTweets();
+    });
+
   });
 };
 

@@ -27,7 +27,7 @@ app.configure(function () {
   }
 });
 
-var getTweets = function () {
+var getTweets = function (backOffDuration) {
 
   // ntwitter setup
   var twit = new Twitter({
@@ -73,22 +73,25 @@ var getTweets = function () {
     });
 
     stream.on('end', function (response) {
-      getTweets();
+      backOff(backOffDuration);
     });
     stream.on('destroy', function (response) {
-      getTweets();
+      backOff(backOffDuration);
     });
-    stream.on('error', function (response) {
-      console.log("an error happened");
-      console.log(response);
-      getTweets();
+    stream.on('error', function (response, status) {
+      console.log("an error happened with status " + status);
+      if (status === 420 && backOffDuration < 60000) {
+        backOff(60000);
+      } else {
+        backOff(backOffDuration);
+      }
     });
 
 
   });
 };
 
-getTweets();
+getTweets(5000);
 
 // routes
 app.get("/?", function (request, response) {
@@ -128,6 +131,14 @@ var findFeelingIndex = function (tokenizedText) {
   } else {
     return tokenizedText.indexOf("felt");
   }
+};
+
+// back off reconnection attempts exponentially
+var backOff = function (duration) {
+  console.log("reconnecting with " + duration + " second back-off");
+  setInterval(function () {
+    getTweets(duration * 2);
+  }, duration);
 };
 
 server.listen(process.env.PORT || 3000);

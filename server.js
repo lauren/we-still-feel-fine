@@ -67,7 +67,6 @@ var getTweets = function (backOffDuration) {
         }
       } else {
         console.log("no data.text?!");
-        getTweets();
       }
       
     });
@@ -81,8 +80,10 @@ var getTweets = function (backOffDuration) {
     stream.on('error', function (response, status) {
       console.log("an error happened with status " + status);
       if (status === 420 && backOffDuration < 60000) {
+        console.log("60000 backoff");
         backOff(60000);
       } else {
+        console.log(backOffDuration + " backoff");
         backOff(backOffDuration);
       }
     });

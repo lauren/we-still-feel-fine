@@ -80,7 +80,7 @@ var getTweets = function () {
     });
     stream.on('error', function (response) {
       console.log("an error happened");
-      console.log(error);
+      console.log(response);
       getTweets();
     });
 

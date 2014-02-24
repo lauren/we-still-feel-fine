@@ -28,6 +28,7 @@ app.configure(function () {
 });
 
 var getTweets = function (backOffDuration) {
+  console.log("getTweets with initial backoff duration: " + backOffDuration);
 
   // ntwitter setup
   var twit = new Twitter({
@@ -72,18 +73,17 @@ var getTweets = function (backOffDuration) {
     });
 
     stream.on('end', function (response) {
-      backOff(backOffDuration);
+      backOff(5000);
     });
     stream.on('destroy', function (response) {
-      backOff(backOffDuration);
+      backOff(5000);
     });
     stream.on('error', function (response, status) {
       console.log("an error happened with status " + status);
+      console.log("current duration: " + backOffDuration);
       if (status === 420 && backOffDuration < 60000) {
-        console.log("60000 backoff");
         backOff(60000);
       } else {
-        console.log(backOffDuration + " backoff");
         backOff(backOffDuration);
       }
     });
@@ -136,9 +136,11 @@ var findFeelingIndex = function (tokenizedText) {
 
 // back off reconnection attempts exponentially
 var backOff = function (duration) {
-  console.log("reconnecting with " + duration + " second back-off");
+  var newDuration = duration * 2;
+  console.log("reconnecting with " + duration + " millisecond back-off");
+  console.log("new duration: " + newDuration);
   setInterval(function () {
-    getTweets(duration * 2);
+    getTweets(newDuration);
   }, duration);
 };
 

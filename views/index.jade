@@ -1,30 +1,31 @@
 extends layout
 
 block content
-  div.nav-link.text-overlay
-    a(href="/about") about
-  div#loading.loading
-    i.heart-load
-    span.load-text Finding feelings on Twitter...
-  h2#tweet-detail.tweet-detail.text-overlay
-    a#user-link
-      img#user-image.user-image
-    div#tweet.tweet
-      a#username-link
-      span#tweet-text
-      br
-      a#tweet-link.tweet-link (view original tweet)
-  svg
-  footer.text-overlay
-    a(rel="license", href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US")
-      img(alt="Creative Commons License", style="border-width:0", src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png") 
-    |  2013 
-    a(href="http://laurensperber") Lauren Sperber
-    |  | An update to the unforgettable 
-    a(href="http://wefeelfine.org") We Feel Fine
-    |  by 
-    a(href="http://number27.org") Jonathan Harris
-    |  and 
-    a(href="http://www.stanford.edu/~sdkamvar/") Sep Kamvar
-    | . 
-    iframe(src="http://ghbtns.com/github-btn.html?user=lauren&repo=we-still-feel-fine&type=watch&count=true", class="github-widgets", allowtransparency="true", frameborder="0", scrolling="0", width="95", height="20")
+  div.container
+    div.nav-link.text-overlay
+      a(href="/about") about
+    div#loading.loading
+      i.heart-load
+      span.load-text Finding feelings on Twitter...
+    h2#tweet-detail.tweet-detail.text-overlay
+      a#user-link
+        img#user-image.user-image
+      div#tweet.tweet
+        a#username-link
+        span#tweet-text
+        br
+        a#tweet-link.tweet-link (view original tweet)
+    svg
+    footer.text-overlay
+      a(rel="license", href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US")
+        img(alt="Creative Commons License", style="border-width:0", src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png") 
+      |  2013 
+      a(href="http://laurensperber") Lauren Sperber
+      |  | An update to the unforgettable 
+      a(href="http://wefeelfine.org") We Feel Fine
+      |  by 
+      a(href="http://number27.org") Jonathan Harris
+      |  and 
+      a(href="http://www.stanford.edu/~sdkamvar/") Sep Kamvar
+      | . 
+      iframe(src="http://ghbtns.com/github-btn.html?user=lauren&repo=we-still-feel-fine&type=watch&count=true", class="github-widgets", allowtransparency="true", frameborder="0", scrolling="0", width="95", height="20")

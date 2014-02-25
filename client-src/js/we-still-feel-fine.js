@@ -200,6 +200,8 @@
           .duration(200)
           .attr("r", 100);
 
+        showLabel(group);
+
         // put the tweet in #tweet-detail and fade in
         d3.select("#user-link")
           .attr("href", "http://twitter.com/" + group.dataset.user);

@@ -66,9 +66,6 @@
         })
         .on("click", function (event) {
           clickGroup(this);
-        })
-        .on("touchstart", function (event) {
-          clickGroup(this);
         });        
 
       // create groups 

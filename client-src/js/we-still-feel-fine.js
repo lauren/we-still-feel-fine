@@ -60,7 +60,7 @@
           }
         })
         .on("mouseleave", function () {
-          if (this.id !== "selected") {
+          if (this.id !== "selected" && !supportsTouch) {
             resetGroup(this);
           }
         })

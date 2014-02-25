@@ -12,7 +12,7 @@ li{margin-bottom:5px}
 .shadow{cursor:pointer;stroke:#000;opacity:0.4;stroke-width:3px;letter-spacing:2px}
 .label{cursor:pointer;stroke:#fff;letter-spacing:2px}
 #selected .label,#selected .shadow{font-size:28px}
-.tweet-detail{bottom:76px;display:none;font-size:30px;padding:15px;width:100%;opacity:0.9;position:fixed;-webkit-box-shadow:0 0 10px 1px #333;-moz-box-shadow:0 0 10px 1px #333;-o-box-shadow:0 0 10px 1px #333;box-shadow:0 0 10px 1px #333}
+.tweet-detail{bottom:80px;display:none;font-size:30px;padding:15px;width:100%;opacity:0.9;position:fixed;-webkit-box-shadow:0 0 10px 1px #333;-moz-box-shadow:0 0 10px 1px #333;-o-box-shadow:0 0 10px 1px #333;box-shadow:0 0 10px 1px #333}
 .user-image{margin-right:10px;margin-top:4px;max-width:50px;max-height:50px;float:left}
 .tweet{width:90%}
 .tweet-link{font-size:14px;vertical-align:middle}

@@ -2,9 +2,10 @@
 
   window.onload = function () {
 
-    var socket = io.connect(),
-        tweets = [],
-        newTweets = [];
+    var socket = io.connect();
+    var tweets = [];
+    var newTweets = [];
+    var supportsTouch = 'ontouchstart' in window;
 
     // constrained by browser width. 100px offset for inner SVG containers.
     var randomX = function () {
@@ -54,7 +55,9 @@
           "data-feelingColor": data.feelingColor
         })
         .on("mouseenter", function () {
-          mouseEnterGroup(this);
+          if (!supportsTouch) {
+            mouseEnterGroup(this);
+          }
         })
         .on("mouseleave", function () {
           if (this.id !== "selected") {
@@ -64,7 +67,7 @@
         .on("click", function (event) {
           clickGroup(this);
         })
-        .on("touchend", function (event) {
+        .on("touchstart", function (event) {
           clickGroup(this);
         });        
 

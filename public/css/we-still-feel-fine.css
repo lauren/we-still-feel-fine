@@ -12,9 +12,9 @@ li{margin-bottom:5px}
 .shadow{cursor:pointer;stroke:#000;opacity:0.4;stroke-width:3px;letter-spacing:2px}
 .label{cursor:pointer;stroke:#fff;letter-spacing:2px}
 #selected .label,#selected .shadow{font-size:28px}
-.tweet-detail{bottom:58px;display:none;font-size:30px;padding:15px;width:100%;opacity:0.9;position:fixed;-webkit-box-shadow:0 0 10px 1px #333;-moz-box-shadow:0 0 10px 1px #333;-o-box-shadow:0 0 10px 1px #333;box-shadow:0 0 10px 1px #333}
+.tweet-detail{bottom:72px;display:none;font-size:30px;padding:15px;width:100%;opacity:0.9;position:fixed;-webkit-box-shadow:0 0 10px 1px #333;-moz-box-shadow:0 0 10px 1px #333;-o-box-shadow:0 0 10px 1px #333;box-shadow:0 0 10px 1px #333}
 .user-image{margin-right:10px;margin-top:4px;max-width:50px;max-height:50px;float:left}
-.tweet{width:99%}
+.tweet{width:90%}
 .tweet-link{font-size:14px;vertical-align:middle}
 footer{padding:5px;bottom:0px;position:fixed;font-family:"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;opacity:0.9}
 .github-widgets{vertical-align:bottom}
@@ -23,3 +23,4 @@ footer{padding:5px;bottom:0px;position:fixed;font-family:"HelveticaNeue-Light","
 .load-text{vertical-align:middle;font-family:"HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;font-size:26px;margin-left:5px}
 .nav-link{position:absolute;right:0;padding:5px 10px 10px 10px;font-size:22px;opacity:0.9}.nav-link a{font-weight:lighter}
 .about{padding:80px 20px 50px 20px;font-size:22px;line-height:28px;margin-bottom:20px;max-width:700px}
+@media screen and (max-width:797px){h1{font-size:34px} .tweet-detail{font-size:24px}}

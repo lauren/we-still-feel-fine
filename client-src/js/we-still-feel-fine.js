@@ -63,6 +63,9 @@
         })
         .on("click", function (event) {
           clickGroup(this);
+        })
+        .on("touchend", function (event) {
+          clickGroup(this);
         });        
 
       // create groups 
@@ -171,7 +174,7 @@
       }
     };
 
-    // what happens when a group is clicked
+    // what happens when a group is clicked 
     var clickGroup = function (group) {
       if (group.id === "selected") {
         

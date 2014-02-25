@@ -135,7 +135,7 @@ var backOff = function (duration) {
   var newDuration = duration * 2;
   console.log("reconnecting with " + duration + " millisecond back-off");
   console.log("new duration: " + newDuration);
-  setInterval(function () {
+  setTimeout(function () {
     getTweets(newDuration * 2);
   }, duration);
 };

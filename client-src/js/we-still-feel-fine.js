@@ -31,7 +31,8 @@
         "Feeling painfully slow...",
         "Interpreting feelings...",
         "Feelings take time to grow...",
-        "I can't feel it yet..."
+        "I can't feel it yet...",
+        "Twitter rate limits make me feel sad..."
       ];
       if (d3.select("#load-text").length > 0) {
         var messageIndex = Math.floor(Math.random() * messages.length);

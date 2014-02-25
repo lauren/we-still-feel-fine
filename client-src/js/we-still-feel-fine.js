@@ -30,7 +30,7 @@
         "So many feelings...",
         "Feeling painfully slow...",
         "Interpreting feelings...",
-        "Feelings take time to grow",
+        "Feelings take time to grow...",
         "I can't feel it yet..."
       ];
       if (d3.select("#load-text").length > 0) {

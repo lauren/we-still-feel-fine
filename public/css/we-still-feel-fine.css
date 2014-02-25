@@ -18,9 +18,9 @@ li{margin-bottom:5px}
 .tweet-link{font-size:14px;vertical-align:middle}
 footer{padding:5px;bottom:0px;position:fixed;font-family:"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;opacity:0.9}
 .github-widgets{vertical-align:bottom}
-.loading{position:absolute;text-align:center;top:45%;left:0;right:0;width:350px;margin:auto}
+.loading{position:absolute;text-align:center;top:45%;left:0;right:0;margin:auto}
 .heart-load{display:inline-block;height:30px;width:30px;background-image:url("/images/heart-loader.gif");vertical-align:middle}
 .load-text{vertical-align:middle;font-family:"HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;font-size:26px;margin-left:5px}
 .nav-link{position:absolute;right:0;padding:5px 10px 10px 10px;font-size:22px;opacity:0.9}.nav-link a{font-weight:lighter}
 .about{padding:80px 20px 50px 20px;font-size:22px;line-height:28px;margin-bottom:20px;max-width:700px}
-@media screen and (max-width:797px){h1{font-size:30px} .tweet-detail{font-size:20px}}
+@media screen and (max-width:797px){h1{font-size:30px} .tweet-detail{font-size:20px} .load-text{font-size:20px}}

@@ -23,6 +23,25 @@
         : 0.25 * document.documentElement.clientWidth;
     };
 
+    // change the loading message every four seconds
+    setInterval(function () {
+      var messages = [
+        "Feelings are hard to find...",
+        "So many feelings...",
+        "Feeling painfully slow...",
+        "Interpreting feelings...",
+        "Feelings take time to grow",
+        "I can't feel it yet..."
+      ];
+      if (d3.select("#load-text").length > 0) {
+        var messageIndex = Math.floor(Math.random() * messages.length);
+        d3.select("#load-text")
+          .transition()
+          .duration(200)
+          .text(messages[messageIndex]);
+      }
+    }, 2000);
+
     socket.on("feelingTweet", function (data) {
 
       if (d3.select("#loading").length > 0) {

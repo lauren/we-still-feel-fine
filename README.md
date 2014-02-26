@@ -12,7 +12,7 @@ Briefly, here's what's going on:
 * I'm listening to the Twitter Streaming API for tweets that contain the feeling indicators: "feel," "feeling," or "felt." The inclusion of the past tense is a divegence from We Feel Fine's methods.
 * When a new Tweet comes in with a feeling indicator word, I create a string of eligible words that starts two words before the feeling indicator and ends five words after it. This is a departure from We Feel Fine, which looked for eligible feelings in the entire sentence in which the feeling indicator was detected. Limiting eligible words to those closer to the feeling indicator seems to provide higher-quality feelings.
 *  I search the string of eligible words for any word in [the list of valid feelings](http://wefeelfine.org/data/files/feelings.txt) that We Feel Fine compiled.
-* If a valid feeling is found in the eligible words selection, I send the source Tweet is sent to the browser, which draws a circle representing the feeling tweet in the color that the original We Feel Fine project used for that feeling. Sad feelings are blue or gray, happy feelings are yellow or orange, loved feelings are pink, and angry feelings are red.
+* If a valid feeling is found in the eligible words selection, the source Tweet is sent to the browser, which draws a circle representing the feeling tweet in the color that the original We Feel Fine project used for that feeling. Sad feelings are blue or gray, happy feelings are yellow or orange, loved feelings are pink, and angry feelings are red.
 
 ## Contributing
 

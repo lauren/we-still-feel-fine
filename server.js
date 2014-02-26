@@ -5,7 +5,7 @@ var express = require("express"),
     io = require("socket.io").listen(server),
     Twitter = require('ntwitter'),
     feelings = require('./lib/feelings.js'),
-    feelingsList = feelings.feelings,
+    feelingsRegex = feelings.feelingsRegex,
     feelingsColors = feelings.feelingColors;
 
 if (env === "development") {
@@ -48,9 +48,9 @@ var getTweets = function (backOffDuration) {
         var tokenizedText = tokenizeText(data.text),
             feelingIndex = findFeelingIndex(tokenizedText),
             eligibleWords = tokenizedText.slice(Math.max(0, feelingIndex - 2), Math.min(feelingIndex + 5, tokenizedText.length)).join(" ");
-        
+
         // look for legitimate feeling words
-        matchingFeelings = new RegExp(feelingsList.join("|")).exec(eligibleWords);
+        matchingFeelings = new RegExp(feelingsRegex).exec(eligibleWords);
 
         if (matchingFeelings) {
           // strip spaces from matching feeling

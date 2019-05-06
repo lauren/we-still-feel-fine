@@ -38,7 +38,7 @@ var getTweets = function (backOffDuration) {
     access_token_secret: process.env.TWITTER_TOKEN_SECRET || keys.TWITTER_TOKEN_SECRET
   });
 
-  twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en', 'filter_level': 'medium'}, function(stream) {
+  twit.stream('statuses/filter', {'track':'feel,feeling,felt', 'language':'en'}, function(stream) {
     stream.on('data', function (data) {
 
       if (data.text) {

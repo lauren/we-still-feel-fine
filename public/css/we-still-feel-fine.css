@@ -1,6 +1,6 @@
 @import url(http://reset5.googlecode.com/hg/reset.min.css);
 .text-overlay{background:#fff;font-weight:lighter}
-body,html{height:100%;width:100%;font-family:"HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;-webkit-transition:border-color .5s ease-in-out;-moz-transition:border-color .5s ease-in-out;-o-transition:border-color .5s ease-in-out;transition:border-color .5s ease-in-out}body a,html a,body a:visited,html a:visited{color:#333;text-decoration:none;font-weight:bold;border-bottom:2px dashed transparent}
+body,html{height:100%;width:100%;margin:0px;font-family:"HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,sans-serif;-webkit-transition:border-color .5s ease-in-out;-moz-transition:border-color .5s ease-in-out;-o-transition:border-color .5s ease-in-out;transition:border-color .5s ease-in-out}body a,html a,body a:visited,html a:visited{color:#333;text-decoration:none;font-weight:bold;border-bottom:2px dashed transparent}
 body a:hover,html a:hover{text-decoration:none;color:#333;border-bottom:2px dashed #333;-webkit-transition:border-color .5s ease-in-out;-moz-transition:border-color .5s ease-in-out;-o-transition:border-color .5s ease-in-out;transition:border-color .5s ease-in-out}
 svg{width:100%;height:100%}
 h1{opacity:0.9;font-size:40px;padding:15px;margin:0px;position:absolute}h1 a,h1 a:hover,h1 a:visited{font-weight:lighter}

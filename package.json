@@ -5,19 +5,18 @@
     "express": "3.x",
     "jade": "~0.33.0",
     "ntwitter": "~0.5.0",
-    "socket.io": "~0.9"
+    "socket.io": "~2.2.0"
   },
   "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
+    "grunt": "^0.4.5",
     "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-less": "~0.6.4",
-    "grunt-contrib-watch": "~0.5.1",
-    "jade": "~0.33.0"
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch": "~0.5.1"
   },
   "repository": {
     "type": "git",

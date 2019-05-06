@@ -1,11 +1,15 @@
 {
   "name": "we-still-feel-fine",
   "version": "0.0.1",
+  "license": "MIT",
   "dependencies": {
-    "express": "3.x",
+    "express": "4.x",
     "jade": "~0.33.0",
     "ntwitter": "~0.5.0",
-    "socket.io": "~2.2.0"
+    "socket.io": "~2.2.0",
+    "morgan": "1.9.x",
+    "body-parser": "1.19.x",
+    "method-override": "3.x.x"
   },
   "engines": {
     "node": "12.1.x",

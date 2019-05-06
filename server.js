@@ -1,4 +1,7 @@
 var express = require("express"),
+    morgan = require("morgan"),
+    bodyParser = require("body-parser"),
+    methodOverride = require("method-override"),
     app = express(),
     server = require("http").createServer(app),
     env = process.env.NODE_ENV || "development",
@@ -14,18 +17,13 @@ if (env === "development") {
 }
 
 // app configuration
-app.configure(function () {
-  app.use(express.static(__dirname + "/public"));
-  app.set("view engine", "jade");
-  app.set("view options", {layout: false});
-  app.set("views", __dirname + "/views");
-  app.use(express.logger("dev"));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  if (env === "development") {
-    // app.use(express.errorHandler());
-  }
-});
+app.use(express.static(__dirname + "/public"));
+app.set("view engine", "jade");
+app.set("view options", {layout: false});
+app.set("views", __dirname + "/views");
+app.use(morgan("dev"));
+app.use(bodyParser());
+app.use(methodOverride());
 
 var getTweets = function (backOffDuration) {
   console.log("getTweets with initial backoff duration: " + backOffDuration);

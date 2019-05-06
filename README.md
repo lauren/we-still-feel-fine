@@ -22,7 +22,7 @@ Pull requests make ME feel ♥. Here's how to contribute:
 2. If you don't have node, [install it](http://howtonode.org/how-to-install-nodejs).
 3. From the repo directory, `npm install --save-dev`
 4. `grunt watch`: This will automatically JSHint all JavaScript, concatenate and minify the client-side JavaScript, and compile the LESS every time you save. Watch for JSHint errors and correct them.
-5. Rename `keys-sample.js` as `keys.js` and update it with your twitter credentials. This file is .gitignored, so it won't be checked in if you push this to a public repo.
+5. Rename `lib/keys-sample.js` as `lib/keys.js` and update it with your twitter credentials. This file is .gitignored, so it won't be checked in if you push this to a public repo.
 6. `foreman start` to start the server, which listens on port 5000.
 7. Code!
 

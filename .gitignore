@@ -2,3 +2,4 @@
 lib/keys.js
 npm-debug.log
 .elasticbeanstalk/
+node_modules
